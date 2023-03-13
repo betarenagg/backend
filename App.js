@@ -34,8 +34,10 @@ app.use('/api/users', Users)
 
 mongoose.set('strictQuery', false);
 
+const URL = 'mongodb+srv://Highscoretech:Keys2541@highscore.muku4gg.mongodb.net/betarena?retryWrites=true&w=majority'
+
 // connect database
-mongoose.connect(process.env.MONGOOSE_URL, { useNewUrlParser: true,  useUnifiedTopology: true })
+mongoose.connect(URL, { useNewUrlParser: true,  useUnifiedTopology: true })
     .then((result)=>  console.log('Database connected'))
     .catch((err)=> console.log(err))
 app.listen(process.env.PORT, ()=>{
