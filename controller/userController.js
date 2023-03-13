@@ -8,8 +8,10 @@ const WalletDB = require('../model/Wallet')
 
 const jwt = require('jsonwebtoken')
 
+const SECRET = `highscoretechBringwexsingthebestamoung23498hx93`
+
 const createToken = ((_id)=>{
-   return  jwt.sign({_id}, process.env.SECRET, { expiresIn: '3d' })
+   return  jwt.sign({_id}, SECRET, { expiresIn: '3d' })
 })
 
 // Login controller
