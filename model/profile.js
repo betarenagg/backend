@@ -40,5 +40,5 @@ const UserProfileSchama = new schema({
     }
 }, { timestamp : true})
 
-const UserProfile = mongoose.model('UserProfile', UserProfileSchama)
+const UserProfile = mongoose.model('Profile', UserProfileSchama)
 module.exports = UserProfile

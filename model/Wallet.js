@@ -45,4 +45,4 @@ const Walletschema = new schema({
     },
 }, { timestamp : true})
 
-module.exports = mongoose.model('Wallet', Walletschema)
+module.exports = mongoose.model('Wallet',  Walletschema)

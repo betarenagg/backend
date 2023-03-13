@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const schema = mongoose.Schema
 
-const Walletschema = new schema({
+const Settingschema = new schema({
     user_id: {
         type: String,
         required: true,
@@ -13,4 +13,4 @@ const Walletschema = new schema({
     }
 }, { timestamp : true})
 
-module.exports = mongoose.model('Wallet', Walletschema)
+module.exports = mongoose.model('Setting', Settingschema)
