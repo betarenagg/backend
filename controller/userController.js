@@ -65,7 +65,7 @@ const CreateAccount = (async (req, res)=>{
 
                     let DOB = 'null'
                     let username = 'null'
-                    let image = 'null'
+                    let img = 'null'
                     let firstname = 'null'
                     let lastname = 'null'
 
@@ -89,7 +89,7 @@ const CreateAccount = (async (req, res)=>{
                         const user = await UserDB.create({ email , password : hash })
                          await SettingDb.create({ user_id:user._id , Fa_Auth })
                         await WalletDB.create({ user_id:user._id , btc , eth, nexo,sol,usdc , usdt ,matic,bnb,busd })
-                        await ProfileDB.create({username,firstname, lastname, DOB, image, Total_bet, Total_waged,rank, Total_win, user_id:user._id})
+                        await ProfileDB.create({username,firstname, lastname, DOB, img, Total_bet, Total_waged,rank, Total_win, user_id:user._id})
 
                         const Token = createToken(user._id)
                         res.status(200).json({email, Token})
