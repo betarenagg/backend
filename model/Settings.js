@@ -5,7 +5,6 @@ const Settingschema = new schema({
     user_id: {
         type: String,
         required: true,
-        unique : true
     },
     Fa_Auth: {
         type: String,

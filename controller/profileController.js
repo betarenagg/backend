@@ -47,16 +47,30 @@ const UserPro = async(req, res)=>{
 
 
 // update userProfile 
-const UpdateUser = async(req, res) =>{
+const SecondStep = async(req, res) =>{
 
-   const {gender , bankName, acc_name, acc_num } = req.body
+   const {username , image } = req.body
 
-   if(!gender || !bankName || !acc_name, !acc_num ){
+   let img = ""
+
+   if(!username || !image ){
        res.status(401).json({error : "All field is required"})
    }else{
       const user_id = req.user._id
+
+      if(image === 1){
+         img = `https://www.linkpicture.com/q/image-65_1.png`
+      }
+     else  if(image === 2){
+         img = `https://www.linkpicture.com/q/female-avatar.png`
+      }
+      else  if(image === 3){
+         img = `https://www.linkpicture.com/q/male-avataer-1_1.png`
+      }else{
+         img = `https://www.linkpicture.com/q/guy-avatar-1_2.png`
+      }
       try{
-    const profileUpdate =  await UsersProfile.updateOne({ user_id }, { gender, bankName, acc_name, acc_num });
+    const profileUpdate =  await UsersProfile.updateOne({ user_id }, { username, img });
          
          res.status(201).json(profileUpdate)
       } catch(err){
@@ -64,4 +78,26 @@ const UpdateUser = async(req, res) =>{
       }
    }
 }
-module.exports = {SingleUser, UserPro, Wallet, UpdateUser }
+
+
+// update userProfile 
+const LastStep = async(req, res) =>{
+
+   const {firstname , lastname, DOB } = req.body
+
+   if(!firstname || !lastname || !DOB ){
+       res.status(401).json({error : "All field is required"})
+   }else{
+      const user_id = req.user._id
+      
+      try{
+    const profileUpdate =  await UsersProfile.updateOne({ user_id }, { firstname, lastname, DOB });
+         
+         res.status(201).json(profileUpdate)
+      } catch(err){
+         res.status(500).json({message: err.message})
+      }
+   }
+}
+
+module.exports = {SingleUser, UserPro, Wallet, SecondStep, LastStep }

@@ -1,8 +1,8 @@
 const mongoose = require("mongoose");
 const schema = mongoose.Schema
 
-const UserProfileSchama = new schema({
-    Username: {
+const ProfileSchama = new schema({
+    username: {
         type: String,
         required: true,
     },
@@ -18,7 +18,7 @@ const UserProfileSchama = new schema({
         type: String,
         required: true,
     },
-    image: {
+    img: {
         type: String,
         required: true,
     },
@@ -34,11 +34,15 @@ const UserProfileSchama = new schema({
         type: String,
         required: true,
     },
+    rank: {
+        type: String,
+        required: true,
+    },
     user_id: {
         type: String,
         required: true,
     }
 }, { timestamp : true})
 
-const UserProfile = mongoose.model('Profile', UserProfileSchama)
-module.exports = UserProfile
+const Profile = mongoose.model('Profile', ProfileSchama)
+module.exports = Profile

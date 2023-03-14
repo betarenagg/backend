@@ -60,26 +60,14 @@ const CreateAccount = (async (req, res)=>{
                     res.status(401).json({error :  "Email already exist"})
                 }else{
 
-                    // declare all characters
-                    // const characters ='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-
-                    // function generateString(length) {
-                    //     let result = ' ';
-                    //     const charactersLength = characters.length;
-                    //     for ( let i = 0; i < length; i++ ) {
-                    //         result += characters.charAt(Math.floor(Math.random() * charactersLength));
-                    //     }
-                    //     return result;
-                    // }
-
                     const salt = await bcrypt.genSalt(10)
                     const hash = await bcrypt.hash(password, salt)
 
-                    let DOB = "-"
-                    let Username = '-'
-                    let image = "-"
-                    let firstname = "-"
-                    let lastname = "-"
+                    let DOB = 'null'
+                    let username = 'null'
+                    let image = 'null'
+                    let firstname = 'null'
+                    let lastname = 'null'
 
                     let btc = "0.00000"
                     let eth = "0.00000"
@@ -93,19 +81,15 @@ const CreateAccount = (async (req, res)=>{
                     let Total_waged = 0
                     let  Total_bet = 0
                     let Total_win = 0
+                    let rank = "V0"
 
                     let Fa_Auth = false
-        
-                    // const username  = generateString(5)
-                    // const male = 'https://www.linkpicture.com/q/female-avatar.png'
-                    // const tiger = `https://www.linkpicture.com/q/image-65_1.png`
-                    // const guy = "https://www.linkpicture.com/q/guy-avatar-1_2.png"
-                    // const female = `https://www.linkpicture.com/q/male-avataer-1_1.png`
+
                     try{
                         const user = await UserDB.create({ email , password : hash })
                          await SettingDb.create({ user_id:user._id , Fa_Auth })
                         await WalletDB.create({ user_id:user._id , btc , eth, nexo,sol,usdc , usdt ,matic,bnb,busd })
-                        await ProfileDB.create({Username,firstname, lastname, DOB, image, Total_bet, Total_waged, Total_win, user_id:user._id})
+                        await ProfileDB.create({username,firstname, lastname, DOB, image, Total_bet, Total_waged,rank, Total_win, user_id:user._id})
 
                         const Token = createToken(user._id)
                         res.status(200).json({email, Token})

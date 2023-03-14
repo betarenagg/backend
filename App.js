@@ -1,6 +1,7 @@
 const express = require('express')
 const mongoose = require('mongoose')
 const Users = require('./routes/Users')
+const Profile = require('./routes/Profile')
 const cors = require('cors');
 
 
@@ -12,6 +13,7 @@ app.use(express.json())
 app.use(cors())
 
 app.use('/api/users', Users)
+app.use('/api/profile', Profile)
 
 mongoose.set('strictQuery', false);
 
