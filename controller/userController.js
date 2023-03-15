@@ -5,6 +5,7 @@ const validator = require('validator')
 const ProfileDB = require('../model/profile')
 const SettingDb = require('../model/Settings')
 const WalletDB = require('../model/Wallet')
+const coinDefaultDB= require('../model/defaultCoin')
 
 const jwt = require('jsonwebtoken')
 
@@ -40,7 +41,6 @@ const Login = (async (req, res)=>{
     }
 })
 
-
 // Signup controller
 const CreateAccount = (async (req, res)=>{ 
 
@@ -69,6 +69,9 @@ const CreateAccount = (async (req, res)=>{
                     let firstname = 'null'
                     let lastname = 'null'
 
+                    let coin_image = "https://assets.coingecko.com/coins/images/1/large/bitcoin.png" 
+                    let coin_name = "BTC"
+                    let coin_bal = "0.00000"
                     let btc = "0.00000"
                     let eth = "0.00000"
                     let nexo = "0.00000"
@@ -82,11 +85,10 @@ const CreateAccount = (async (req, res)=>{
                     let  Total_bet = 0
                     let Total_win = 0
                     let rank = "V0"
-
                     let Fa_Auth = false
-
                     try{
                         const user = await UserDB.create({ email , password : hash })
+                        await coinDefaultDB.create({user_id:user._id , coin_image, coin_name , coin_bal })
                          await SettingDb.create({ user_id:user._id , Fa_Auth })
                         await WalletDB.create({ user_id:user._id , btc , eth, nexo,sol,usdc , usdt ,matic,bnb,busd })
                         await ProfileDB.create({username,firstname, lastname, DOB, img, Total_bet, Total_waged,rank, Total_win, user_id:user._id})

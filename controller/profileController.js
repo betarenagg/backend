@@ -2,6 +2,7 @@ const mongoose = require('mongoose')
 const UserProfile =  require('../model/users')
 const UsersProfile =  require('../model/profile')
 const WalletDB = require("../model/Wallet")
+const defaultCoinDB = require("../model/defaultCoin")
 
 
 // Get single user's profile
@@ -27,7 +28,6 @@ const Wallet = async(req,res) =>{
       res.status(501).json({message: err.message})
    }
 }
-
 
 // Get an individual profile
 const UserPro = async(req, res)=>{
@@ -79,7 +79,6 @@ const SecondStep = async(req, res) =>{
    }
 }
 
-
 // update userProfile 
 const LastStep = async(req, res) =>{
 
@@ -100,4 +99,34 @@ const LastStep = async(req, res) =>{
    }
 }
 
-module.exports = {SingleUser, UserPro, Wallet, SecondStep, LastStep }
+// update userProfile 
+const DefaultCoin = async(req, res) =>{
+      const user_id = req.user._id
+      try{
+    const defaultCoin =  await defaultCoinDB.find({ user_id })
+         
+         res.status(201).json(defaultCoin)
+      } catch(err){
+         res.status(500).json({message: err.message})
+      }
+}
+
+// update userProfile 
+const UpdateDefaultCoin = async(req, res) =>{
+
+   const {coin_name , coin_image, coin_bal } = req.body
+
+   if(!coin_name  || !coin_image|| !coin_bal  ){
+       res.status(401).json({error : "All field is required"})
+   }else{
+      const user_id = req.user._id
+      try{
+    const Update =  await defaultCoinDB.updateOne({ user_id }, { coin_name,coin_image, coin_bal });
+         
+         res.status(201).json(Update)
+      } catch(err){
+         res.status(500).json({message: err.message})
+      }
+   }
+}
+module.exports = {SingleUser, UpdateDefaultCoin, UserPro, DefaultCoin, Wallet, SecondStep, LastStep }

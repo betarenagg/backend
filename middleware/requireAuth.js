@@ -4,8 +4,6 @@ const User = require('../model/users')
 const requireAuth = ( async (req, res, next)=>{
 
     const SECRET = `highscoretechBringwexsingthebestamoung23498hx93`
-
-
     const  {authorization}  = req.headers
 
     if(!authorization){
