@@ -45,7 +45,6 @@ const UserPro = async(req, res)=>{
 
 // update userProfile 
 const SecondStep = async(req, res) =>{
-
    const {username , image } = req.body
    let img = ""
    if(!username || !image ){
