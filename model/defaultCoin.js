@@ -14,6 +14,7 @@ const DefaultCoinSchama = new schema({
         type: String,
         required: true,
     },
+    wallet_address: [],
     user_id: {
         type: String,
         required: true,

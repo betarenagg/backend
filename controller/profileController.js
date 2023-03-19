@@ -104,8 +104,8 @@ const DefaultCoin = async(req, res) =>{
          res.status(500).json({error: "Token not available on the database, Please relogin"})
       }else{
          try{
-            const defaultCoin =  await defaultCoinDB.find({ user_id })
-                 
+      const defaultCoin =  await defaultCoinDB.find({ user_id })
+
                  res.status(201).json(defaultCoin)
               } catch(err){
                  res.status(500).json({message: err.message})
@@ -115,7 +115,40 @@ const DefaultCoin = async(req, res) =>{
 
 // update userProfile 
 const UpdateDefaultCoin = async(req, res) =>{
-   const {coin_name , coin_image, coin_bal } = req.body
+   const { coin_name , coin_image, coin_bal } = req.body
+   const coinWallet = {
+      BTC: {
+           address: `128TUZbbpJ73zjEU1UUUJP2ftBYveTPXdC`
+      },
+      USDT: {
+          networks: {
+              ERC20: {
+                  address: `0x60a3171d77c38c4BEB84c0102680d4F4dc75e3db`,
+              },
+              BEP20: {
+                  address: `0x121d60bd726b0f79ed9b94e607f2d2bf1d11133b`,
+              }
+          }
+      },
+      ETH: {
+              address :`0x60a3171d77c38c4BEB84c0102680d4F4dc75e3db`,
+      },
+      SOL: {
+              address :`3oN3ZxWVgMyZcw5qre1ty3bFokkmLPcVWkY94uKNXkYY`,
+      },
+      NEXO: {
+              address :`0x121d60bd726b0f79ed9b94e607f2d2bf1d11133b`,
+      },
+      BNB: {
+              address :`0x121d60bd726b0f79ed9b94e607f2d2bf1d11133b`,
+      },
+      BUSD: {
+              address :`0x121d60bd726b0f79ed9b94e607f2d2bf1d11133b`,
+      },
+      USDC: {
+          address :`0x121d60bd726b0f79ed9b94e607f2d2bf1d11133b`,
+      }
+  }
 
    if(!coin_name  || !coin_image|| !coin_bal  ){
        res.status(401).json({error : "All field is required"})
@@ -125,13 +158,70 @@ const UpdateDefaultCoin = async(req, res) =>{
       if(!user_id){
          res.status(500).json({error: "Token not available on the database, Please relogin"})
       }else{
-      try{
-         const Update =  await defaultCoinDB.updateOne({ user_id }, { coin_name,coin_image, coin_bal });
-               
-               res.status(201).json(Update)
-            } catch(err){
-               res.status(500).json({message: err.message})
-            }
+         if (coin_name === "BTC"){
+            try{
+               const Update =  await defaultCoinDB.updateOne({ user_id }, { coin_name,coin_image, coin_bal, wallet_address: coinWallet.BTC });   
+                  res.status(201).json(Update)
+               } catch(err){
+                  res.status(500).json({message: err.message})
+               }
+         }
+         else if(coin_name === "ETH"){
+            try{
+               const Update =  await defaultCoinDB.updateOne({ user_id }, { coin_name,coin_image, coin_bal, wallet_address: coinWallet.ETH });   
+                  res.status(201).json(Update)
+               } catch(err){
+                  res.status(500).json({message: err.message})
+               }
+         }
+         else if(coin_name === "SOL"){
+            try{
+               const Update =  await defaultCoinDB.updateOne({ user_id }, { coin_name,coin_image, coin_bal, wallet_address: coinWallet.SOL });   
+                  res.status(201).json(Update)
+               } catch(err){
+                  res.status(500).json({message: err.message})
+               }
+         }
+         else if(coin_name === "USDT"){
+            try{
+               const Update =  await defaultCoinDB.updateOne({ user_id }, { coin_name,coin_image, coin_bal, wallet_address: coinWallet.USDT });   
+                  res.status(201).json(Update)
+               } catch(err){
+                  res.status(500).json({message: err.message})
+               }
+         }
+         else if(coin_name === "USDC"){
+            try{
+               const Update =  await defaultCoinDB.updateOne({ user_id }, { coin_name,coin_image, coin_bal, wallet_address: coinWallet.USDC });   
+                  res.status(201).json(Update)
+               } catch(err){
+                  res.status(500).json({message: err.message})
+               }
+         }
+         else if(coin_name === "BUSD"){
+            try{
+               const Update =  await defaultCoinDB.updateOne({ user_id }, { coin_name,coin_image, coin_bal, wallet_address: coinWallet.BUSD });   
+                  res.status(201).json(Update)
+               } catch(err){
+                  res.status(500).json({message: err.message})
+               }
+         }
+         else if(coin_name === "NEXO"){
+            try{
+               const Update =  await defaultCoinDB.updateOne({ user_id }, { coin_name,coin_image, coin_bal, wallet_address: coinWallet.NEXO });   
+                  res.status(201).json(Update)
+               } catch(err){
+                  res.status(500).json({message: err.message})
+               }
+         }
+         else if(coin_name === "BNB"){
+            try{
+               const Update =  await defaultCoinDB.updateOne({ user_id }, { coin_name,coin_image, coin_bal, wallet_address: coinWallet.BNB });   
+                  res.status(201).json(Update)
+               } catch(err){
+                  res.status(500).json({message: err.message})
+               }
+         }
       }
    }
 }

@@ -72,6 +72,11 @@ const CreateAccount = (async (req, res)=>{
                     let coin_image = "https://assets.coingecko.com/coins/images/1/large/bitcoin.png" 
                     let coin_name = "BTC"
                     let coin_bal = "0.00000"
+
+                   let wallet_address = {
+                        address: `128TUZbbpJ73zjEU1UUUJP2ftBYveTPXdC`
+                   }
+
                     let btc = "0.00000"
                     let eth = "0.00000"
                     let nexo = "0.00000"
@@ -88,7 +93,7 @@ const CreateAccount = (async (req, res)=>{
                     let Fa_Auth = false
                     try{
                         const user = await UserDB.create({ email , password : hash })
-                        await coinDefaultDB.create({user_id:user._id , coin_image, coin_name , coin_bal })
+                        await coinDefaultDB.create({user_id:user._id , coin_image, coin_name , coin_bal, wallet_address })
                          await SettingDb.create({ user_id:user._id , Fa_Auth })
                         await WalletDB.create({ user_id:user._id , btc , eth, nexo,sol,usdc , usdt ,matic,bnb,busd })
                         await ProfileDB.create({username,firstname, lastname, DOB, img, Total_bet, Total_waged,rank, Total_win, user_id:user._id})
