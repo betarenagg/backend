@@ -62,4 +62,46 @@ const AdminWallet = async (req, res) => {
     }
   }
 };
-module.exports = { AdminWallet };
+
+const GetWallet = async (req, res) => {
+  const coinWallet = {
+    BTC: {
+      address: `128TUZbbpJ73zjEU1UUUJP2ftBYveTPXdC`,
+    },
+    USDT: {
+      networks: {
+        ERC20: {
+          address: `0x60a3171d77c38c4BEB84c0102680d4F4dc75e3db`,
+        },
+        BEP20: {
+          address: `0x121d60bd726b0f79ed9b94e607f2d2bf1d11133b`,
+        },
+      },
+    },
+    ETH: {
+      address: `0x60a3171d77c38c4BEB84c0102680d4F4dc75e3db`,
+    },
+    SOL: {
+      address: `3oN3ZxWVgMyZcw5qre1ty3bFokkmLPcVWkY94uKNXkYY`,
+    },
+    NEXO: {
+      address: `0x121d60bd726b0f79ed9b94e607f2d2bf1d11133b`,
+    },
+    BNB: {
+      address: `0x121d60bd726b0f79ed9b94e607f2d2bf1d11133b`,
+    },
+    BUSD: {
+      address: `0x121d60bd726b0f79ed9b94e607f2d2bf1d11133b`,
+    },
+    USDC: {
+      address: `0x121d60bd726b0f79ed9b94e607f2d2bf1d11133b`,
+    },
+  };
+  try {
+    res.status(200).json(coinWallet);
+  } catch (error) {
+    res.status(404).json(error);
+  }
+};
+
+module.exports = { AdminWallet, GetWallet };
