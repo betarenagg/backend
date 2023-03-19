@@ -9,7 +9,7 @@ const AdminWallet = async(req,res) =>{
     }else{
         const coinWallet = {
             BTC: {
-                 address: `128TUZbbpJ73zjEU1UUUJP2ftBYveTPXdC`,
+                 address: `128TUZbbpJ73zjEU1UUUJP2ftBYveTPXdC`
             },
             USDT: {
                 networks: {
