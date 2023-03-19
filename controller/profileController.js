@@ -122,7 +122,6 @@ const UpdateDefaultCoin = async(req, res) =>{
        res.status(401).json({error : "All field is required"})
    }else{
       const user_id = req.user._id
-
       if(!user_id){
          res.status(500).json({error: "Token not available on the database, Please relogin"})
       }else{
